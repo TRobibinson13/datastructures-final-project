@@ -1,0 +1,159 @@
+package Classes;
+
+public class TestCase
+{
+    private String testCaseTye;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+    private String email;
+    private String userName;
+    private int paramCount;
+    private int verifiedParams;
+    private boolean verification;
+    private TestCase nextTestCase;
+
+    public TestCase(String testCase)
+    {
+        String testCaseInfoString = new String(testCase.substring(testCase.indexOf(":") + 2));
+        String testCaseType = new String(testCaseInfoString.substring(0, testCaseInfoString.indexOf(" ")));
+        String[] testCaseInfo = testCaseInfoString.split(" ");
+        this.testCaseTye = testCaseInfo[0];
+        this.firstName = testCaseInfo[1];
+        this.lastName = testCaseInfo[2];
+
+
+        for (String params:testCaseInfo)
+        {
+            this.paramCount ++;
+        }
+
+        if(testCaseType.matches("Insert"))
+        {
+            this.verifiedParams++;
+
+            this.phoneNumber = testCaseInfo[3];
+            this.email = testCaseInfo[4];
+
+            verifyName(firstName);
+            verifyName(lastName);
+
+            if(phoneNumber.matches("\\d{3}-\\d{3}-\\d{4}"))
+            {
+                this.verifiedParams++;
+            }
+
+            if(email.matches("(\\S+)@(\\S+)\\.(\\S+)"))
+            {
+                this.verifiedParams++;
+            }
+        }
+
+        else if(testCaseType.matches("Lookup"))
+        {
+            this.verifiedParams++;
+            verifyName(firstName);
+            verifyName(lastName);
+        }
+
+        else if(testCaseTye.matches("Delete"))
+        {
+            this.verifiedParams++;
+            verifyName(firstName);
+            verifyName(lastName);
+            verifyTestCase();
+        }
+        verifyTestCase();
+        setUserName(firstName, lastName);
+    }
+
+    public void verifyName(String param)
+    {
+        if(param.matches("\\w\\*"))
+        {
+            this.verifiedParams++;
+        }
+    }
+
+    public void verifyTestCase(TestCase testCase)
+    {
+        if(this.verifiedParams == paramCount)
+        {
+            this.verification = true;
+        }
+    }
+
+    public String getTestCaseTye()
+    {
+        return testCaseTye;
+    }
+
+    public void setTestCaseTye(String testCaseTye)
+    {
+        this.testCaseTye = testCaseTye;
+    }
+
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName)
+    {
+        this.firstName = firstName;
+    }
+
+    public String getLastName()
+    {
+        return lastName;
+    }
+
+    public void setLastName(String lastName)
+    {
+        this.lastName = lastName;
+    }
+
+    public String getPhoneNumber()
+    {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber)
+    {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
+    public boolean getVerification(TestCase testCase)
+    {
+        verifyTestCase(testCase);
+        return verification;
+    }
+
+    public void setVerification(boolean verification)
+    {
+        this.verification = verification;
+    }
+
+    public String getUserName()
+    {
+        return userName;
+    }
+
+    public void setUserName(String firstName, String lastName)
+    {
+        if(verification)
+        {
+            this.userName = (firstName + lastName).toUpperCase();
+        }
+    }
+}
