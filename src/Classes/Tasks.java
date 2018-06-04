@@ -2,9 +2,10 @@ package Classes;
 
 public class Tasks
 {
+    /**
     public void insert(String userName, User user)
     {
-        testCaseUsers.setValue(userName.hashCode(),user);
+        testCase.setValue(userName.hashCode(),user);
     }
 
     public String[] lookup(String userName)
@@ -24,4 +25,5 @@ public class Tasks
         User user = testCaseUsers.getValue(userName.hashCode());
         return user;
     }
+     **/
 }

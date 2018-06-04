@@ -11,7 +11,8 @@ public class TestCase
     private int paramCount;
     private int verifiedParams;
     private boolean verification;
-    private TestCase nextTestCase;
+    private int testCaseListIndex;
+    //private TestCase nextTestCase;
 
     public TestCase(String testCase)
     {
@@ -21,7 +22,6 @@ public class TestCase
         this.testCaseTye = testCaseInfo[0];
         this.firstName = testCaseInfo[1];
         this.lastName = testCaseInfo[2];
-
 
         for (String params:testCaseInfo)
         {
@@ -42,10 +42,19 @@ public class TestCase
             {
                 this.verifiedParams++;
             }
+            else
+            {
+                System.out.println("TestCase[" + getTestCaseListIndex() + "]'s PhoneNumber Couldn't be verified");
+            }
 
             if(email.matches("(\\S+)@(\\S+)\\.(\\S+)"))
             {
                 this.verifiedParams++;
+            }
+            else
+            {
+                System.out.println("TestCase[" + getTestCaseListIndex() + "]'s Email Couldn't be verified");
+
             }
         }
 
@@ -61,17 +70,20 @@ public class TestCase
             this.verifiedParams++;
             verifyName(firstName);
             verifyName(lastName);
-            verifyTestCase();
         }
-        verifyTestCase();
+        //verifyTestCase();
         setUserName(firstName, lastName);
     }
 
     public void verifyName(String param)
     {
-        if(param.matches("\\w\\*"))
+        if(param.matches("\\D*"))
         {
             this.verifiedParams++;
+        }
+        else
+        {
+            System.out.println("Name was not Verified");
         }
     }
 
@@ -85,7 +97,7 @@ public class TestCase
 
     public String getTestCaseTye()
     {
-        return testCaseTye;
+        return this.testCaseTye;
     }
 
     public void setTestCaseTye(String testCaseTye)
@@ -155,5 +167,15 @@ public class TestCase
         {
             this.userName = (firstName + lastName).toUpperCase();
         }
+    }
+
+    public int getTestCaseListIndex()
+    {
+        return testCaseListIndex;
+    }
+
+    public void setTestCaseListIndex(int index)
+    {
+        this.testCaseListIndex = index;
     }
 }

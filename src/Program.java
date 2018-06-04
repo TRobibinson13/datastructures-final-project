@@ -1,9 +1,10 @@
-import Classes.*;
+package Classes;
 public class Program
 {
-    private boolean verifiedTestCases;
-    private TestCases testCasesList = new TestCases();
-    private HashMap userHashMap = new HashMap();
+    private static boolean verifiedTestCases;
+    private static TestCases testCasesList = new TestCases();
+    private static HashMap userHashMap = new HashMap();
+    private static int testCaseListCount;
 
     public static void main(String[] args)
     {
@@ -36,42 +37,57 @@ public class Program
                 };
 
         generateTestCases(testCasesString);
-        verifyTestCases(testCasesList);
+
         runTestCases();
     }
 
-
     public static void generateTestCases(String[] testCasesString)
     {
+        verifiedTestCases = false;
 
         for(String testCaseString :testCasesString)
         {
             TestCase testCase = new TestCase(testCaseString);
+            testCase.setTestCaseListIndex(testCasesList.getNumberOfEntries());
             Node newNode = new Node(testCase);
-            this.testCasesList.add(newNode);
+            testCasesList.add(newNode);
+
+            String outputMessage = testCaseString + " has been added to the TestCase List at the index of " + testCase.getTestCaseListIndex();
+            System.out.println(outputMessage);
+
+            testCasesList.incrementNumberOfEntries();
+            System.out.println("TestCase List Count: " + testCasesList.getNumberOfEntries());
+            verifyTestCase(testCase);
+            System.out.println();
         }
     }
 
-    public static boolean verifyTestCases(TestCases testCasesList)
+    public static boolean verifyTestCase(TestCase testCase)
     {
-        this.verifiedTestCases = false;
-        for (testCase:testCasesList)
+        boolean verification = testCase.getVerification(testCase);
+
+        if(verification == true)
         {
-            if(testCase.getVerification == false)
-            {
-                return verifiedTestCases;
-            }
+            verifiedTestCases = true;
         }
-        verifiedTestCases = true;
+        else
+        {
+            verifiedTestCases = false;
+        }
+
+        System.out.println("Verification of TestCase at the Index of " + testCase.getTestCaseListIndex() + " is " + verification);
         return verifiedTestCases;
     }
 
     public static void runTestCases()
     {
-        Node testCase = testCasesList.firstNode;
-        while(testCase != null)
+        Node currentTestCase = testCasesList.firstNode;
+        currentTestCase.getTestCaseData();
+        System.out.println();
+/**
+        while(currentTestCase != null)
         {
-            switch(testCase.getTestCaseType())
+            switch(currentTestCase.data.tes())
             {
                 case "Insert":
                     userHashMap.setValue(testCase.getUserName().hashCode(),new User(testCase.getFirstName(), testCase.getLastName(), testCase.getPhoneNumber(), testCase.getEmail()));
@@ -88,5 +104,6 @@ public class Program
 
             testCase = testCase.getNodeAfter();
         }
+ **/
     }
 }

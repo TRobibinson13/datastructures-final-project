@@ -1,6 +1,6 @@
 package Classes;
 
-public class TestCases<Node>
+public class TestCases<T>
 {
     public Node firstNode;
     private int numberOfEntries;
@@ -21,21 +21,21 @@ public class TestCases<Node>
         else
         {
             Node currentNode = firstNode;
-            while(currentNode.getNodeAfter() !== null)
+            while(currentNode.getNodeAfter() != null)
             {
                 currentNode = currentNode.getNodeAfter();
             }
             currentNode.setNodeAfter(newNode);
+            newNode.setNodeBefore(currentNode);
         }
         numberOfEntries++;
-        createdNode.setListPosition;
     }
 
-    public boolean add(int index, Node newNode);
+    public boolean add(int index, Node newNode)
     {
-        if (index > (numberOfEntries +1) || < 0)
+        if (index > (numberOfEntries +1) || index < 0)
         {
-            return false
+            return false;
         }
 
         else if(index == 0)
@@ -48,14 +48,14 @@ public class TestCases<Node>
     else if(index == numberOfEntries)
     {
         add(newNode);
-        return true
+        return true;
     }
 
     else
     {
         int count = 0;
         Node currentNode = firstNode;
-        while(count !== index)
+        while(count != index)
         {
             currentNode = currentNode.getNodeAfter();
             count++;
@@ -69,21 +69,56 @@ public class TestCases<Node>
         return true;
     }
 
+    public int getNumberOfEntries()
+    {
+        return numberOfEntries;
+    }
+
+    public void setNumberOfEntries(int index)
+    {
+        this.numberOfEntries = index;
+    }
+
+    public void incrementNumberOfEntries()
+    {
+        int index = getNumberOfEntries();
+        setNumberOfEntries(index++);
+    }
+
+    public Node getNode(int index)
+    {
+        int count = 0;
+        Node currentNode = firstNode;
+
+        if(index < 0 || index >= numberOfEntries)
+        {
+            while (count != index)
+            {
+                currentNode = currentNode.getNodeAfter();
+            }
+            return currentNode;
+        }
+        return currentNode;
+    }
+
+    /**
     public boolean remove(int index)
     {
-        if (index > (numberOfEntries - 1) || < 0)
+        int count = 0;
+        if (index > (numberOfEntries - 1) || index < 0)
         {
-            return false
+            return false;
         }
 
         Node currentNode = firstNode;
-        while(count !== index)
+        while(count != index)
         {
             currentNode = currentNode.getNodeAfter();
+            count++;
         }
 
-        currentNode.getNodeBefore().setNextNode(currentNode.getNextNode());
-        currentNode.getNextNode().setNodeBefore(currentNode.getNodeBefore());
+        currentNode.getNodeBefore().setNodeAfter(currentNode.getNodeAfter());
+        currentNode.getNodeAfter().setNodeBefore(currentNode.getNodeBefore());
         currentNode = null;
         numberOfEntries--;
         return true;
@@ -94,14 +129,14 @@ public class TestCases<Node>
         int count = 0;
         Node currentNode = firstNode;
 
-        while(currentNode.getNextNode() !== null)
+        while(currentNode.getNodeAfter() != null)
         {
             Node nodeToMeetDaleks = currentNode;
             currentNode = currentNode.getNodeAfter();
             nodeToMeetDaleks = null;
             numberOfEntries--;
         }
-        if(currentNode.getNodeBeofore() == null)
+        if(currentNode.getNodeBefore() == null)
         {
             currentNode = null;
             numberOfEntries--;
@@ -113,9 +148,9 @@ public class TestCases<Node>
         int count = 0;
         Node currentNode = firstNode;
 
-        if(index < 0 || >= numberOfEntries)
+        if(index < 0 || index >= numberOfEntries)
         {
-            while (count !== index)
+            while (count != index)
             {
                 currentNode = currentNode.getNodeAfter();
             }
@@ -125,22 +160,9 @@ public class TestCases<Node>
         }
     }
 
-    public Node getNode(int index);
-    {
-        int count = 0;
-        Node currentNode = firstNode;
 
-        if(index < 0 || >= numberOfEntries)
-        {
-            while (count !== index)
-            {
-                currentNode = currentNode.getNodeAfter();
-            }
-            return currentNode;
-        }
-    }
 
-    public boolean contains(Node anEntry);
+    public boolean contains(Node anEntry)
 
     public int getLength()
     {
@@ -151,9 +173,9 @@ public class TestCases<Node>
     {
         if(this.firstNode == 0)
         {
-            return true
+            return true;
         }
-        return false
+        return false;
     }
 
     public Node[] toArray()
@@ -169,4 +191,5 @@ public class TestCases<Node>
         }
         return testCasesArray;
     }
+  **/
 }

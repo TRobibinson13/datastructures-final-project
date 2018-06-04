@@ -6,7 +6,7 @@ public class HashMap<T>
 
     HashEntry<T>[] table;
 
-    HashMap()
+    public HashMap()
     {
         table = new HashEntry[TABLE_SIZE];
         for (int i = 0; i < TABLE_SIZE; i++)
