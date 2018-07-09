@@ -2,7 +2,7 @@ package Classes;
 
 public class TestCase
 {
-    private String testCaseTye;
+    private String testCaseType;
     private String firstName;
     private String lastName;
     private String phoneNumber;
@@ -19,7 +19,7 @@ public class TestCase
         String testCaseInfoString = new String(testCase.substring(testCase.indexOf(":") + 2));
         String testCaseType = new String(testCaseInfoString.substring(0, testCaseInfoString.indexOf(" ")));
         String[] testCaseInfo = testCaseInfoString.split(" ");
-        this.testCaseTye = testCaseInfo[0];
+        this.testCaseType = testCaseInfo[0];
         this.firstName = testCaseInfo[1];
         this.lastName = testCaseInfo[2];
 
@@ -65,7 +65,7 @@ public class TestCase
             verifyName(lastName);
         }
 
-        else if(testCaseTye.matches("Delete"))
+        else if(testCaseType.matches("Delete"))
         {
             this.verifiedParams++;
             verifyName(firstName);
@@ -95,14 +95,14 @@ public class TestCase
         }
     }
 
-    public String getTestCaseTye()
+    public String getTestCaseType()
     {
-        return this.testCaseTye;
+        return this.testCaseType;
     }
 
-    public void setTestCaseTye(String testCaseTye)
+    public void setTestCaseType(String testCaseType)
     {
-        this.testCaseTye = testCaseTye;
+        this.testCaseType = testCaseType;
     }
 
     public String getFirstName()
@@ -163,10 +163,7 @@ public class TestCase
 
     public void setUserName(String firstName, String lastName)
     {
-        if(verification)
-        {
             this.userName = (firstName + lastName).toUpperCase();
-        }
     }
 
     public int getTestCaseListIndex()

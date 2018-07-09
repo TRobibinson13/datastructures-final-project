@@ -1,11 +1,11 @@
 package Classes;
 
-public class TestCases<T>
+public class TestCaseList<T>
 {
     public Node firstNode;
     private int numberOfEntries;
 
-    public TestCases()
+    public TestCaseList()
     {
         firstNode = null;
         this.numberOfEntries = 0;

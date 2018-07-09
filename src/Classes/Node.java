@@ -1,8 +1,9 @@
 package Classes;
+import java.lang.reflect.*;
 
 public class Node<T>
 {
-    private T data;
+    public T data;
     private Node nodeBefore;
     private Node nodeAfter;
 
@@ -18,12 +19,27 @@ public class Node<T>
         this.nodeAfter = nodeAfter;
     }
 
-    public T getTestCaseData()
+    public T getData()
     {
         return data;
     }
 
-    public void setTestCaseData(T testCaseData)
+    public void getTestCaseData()
+    {
+        Field[] dataFields = this.data.getClass().getDeclaredFields();
+
+        String[] results = new String[dataFields.length];
+
+        int count = 0;
+        for(Field field : dataFields)
+        {
+            System.out.println("The field is: ");
+            System.out.println(field.getName());
+            System.out.println();
+        }
+    }
+
+    public void setData(T testCaseData)
     {
         this.data = testCaseData;
     }

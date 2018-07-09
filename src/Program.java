@@ -1,11 +1,18 @@
 package Classes;
+
+import java.util.*;
+
 public class Program
 {
     private static boolean verifiedTestCases;
-    private static TestCases testCasesList = new TestCases();
+    private static TestCaseList testCasesList = new TestCaseList();
     private static HashMap userHashMap = new HashMap();
     private static int testCaseListCount;
 
+    /**
+     * The main method begins the execution of Program
+     * @param args not used
+     */
     public static void main(String[] args)
     {
         String [] testCasesString =
@@ -39,8 +46,14 @@ public class Program
         generateTestCases(testCasesString);
 
         runTestCases();
+
+        System.out.println("Stop point");
     }
 
+    /**
+     * Converts an array of Strings into an array TestCases's
+     * @param testCasesString
+     */
     public static void generateTestCases(String[] testCasesString)
     {
         verifiedTestCases = false;
@@ -52,7 +65,7 @@ public class Program
             Node newNode = new Node(testCase);
             testCasesList.add(newNode);
 
-            String outputMessage = testCaseString + " has been added to the TestCase List at the index of " + testCase.getTestCaseListIndex();
+            String outputMessage = testCaseString + " has been added to the testCaseList at the index of " + testCase.getTestCaseListIndex();
             System.out.println(outputMessage);
 
             testCasesList.incrementNumberOfEntries();
@@ -81,29 +94,32 @@ public class Program
 
     public static void runTestCases()
     {
-        Node currentTestCase = testCasesList.firstNode;
-        currentTestCase.getTestCaseData();
-        System.out.println();
-/**
-        while(currentTestCase != null)
+        Node currentNodeTestCase = testCasesList.firstNode;
+
+        while(currentNodeTestCase != null)
         {
-            switch(currentTestCase.data.tes())
+            if(currentNodeTestCase.data instanceof TestCase)
             {
-                case "Insert":
-                    userHashMap.setValue(testCase.getUserName().hashCode(),new User(testCase.getFirstName(), testCase.getLastName(), testCase.getPhoneNumber(), testCase.getEmail()));
-                    break;
+                TestCase testCase = (TestCase)currentNodeTestCase.data;
+                switch (testCase.getTestCaseType())
+                {
+                    case "Insert":
+                        userHashMap.setValue(testCase.getUserName().hashCode(), new User(testCase.getFirstName(), testCase.getLastName(), testCase.getPhoneNumber(), testCase.getEmail()));
+                        System.out.println(testCase.getUserName()+ " is being Inserted");
+                        break;
 
-                case "Lookup":
-                    userHashMap.getValue(testCase.getUserName().hashCode());
-                    break;
+                    case "Lookup":
+                        userHashMap.getValue(testCase.getUserName().hashCode());
+                        System.out.println(testCase.getUserName()+" has been looked up");
+                        break;
 
-                case "Delete":
-                    userHashMap.deleteEntry(testCase.getUserName().hashCode());
-                    break;
+                    case "Delete":
+                        System.out.println(testCase.getUserName()+ " is being removed");
+                        userHashMap.deleteEntry(testCase.getUserName().hashCode());
+                        break;
+                }
             }
-
-            testCase = testCase.getNodeAfter();
+            currentNodeTestCase = currentNodeTestCase.getNodeAfter();
         }
- **/
     }
 }
