@@ -12,7 +12,6 @@ public class TestCase
     private int verifiedParams;
     private boolean verification;
     private int testCaseListIndex;
-    //private TestCase nextTestCase;
 
     public TestCase(String testCase)
     {

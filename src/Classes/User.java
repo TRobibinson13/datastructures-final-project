@@ -1,4 +1,6 @@
 package Classes;
+import java.lang.StringBuilder;
+import java.lang.reflect.Field;
 
 public class User
 {
@@ -82,4 +84,10 @@ public class User
         this.userKey = (this.userName).hashCode();
     }
 
+    public String toString()
+    {
+        String newLine = System.getProperty("line.separator");
+        String output = "First Name: " + getFirstName() + newLine + "Last Name: " + getLastName() + newLine + "Phone Number: " + getPhoneNumber() + newLine + "Email: " + getEmail() + newLine + "UserName: "+ getUserName();
+        return output;
+    }
 }

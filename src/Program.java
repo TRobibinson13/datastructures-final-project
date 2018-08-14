@@ -1,17 +1,14 @@
 package Classes;
 
-import java.util.*;
 
 public class Program
 {
     private static boolean verifiedTestCases;
-    private static TestCaseList testCasesList = new TestCaseList();
+    private static CustomLinkedList testCasesList = new CustomLinkedList();
     private static HashMap userHashMap = new HashMap();
-    private static int testCaseListCount;
 
     /**
-     * The main method begins the execution of Program
-     * @param args not used
+     * The main method begins the execution of Program based on the parsed Test Cases as an array of Strings.
      */
     public static void main(String[] args)
     {
@@ -51,14 +48,15 @@ public class Program
     }
 
     /**
-     * Converts an array of Strings into an array TestCases's
-     * @param testCasesString
+     * Breaks appart an array of strings into individual strings.  Per string, it then creates a TestCase object via its values, and then adds the string
+     * as a Node into a Linked list
+     * @param testCasesAsStrings the Array of Strings that is to be broken apart.
      */
-    public static void generateTestCases(String[] testCasesString)
+    public static void generateTestCases(String[] testCasesAsStrings)
     {
-        verifiedTestCases = false;
+        verifiedTestCases = true;
 
-        for(String testCaseString :testCasesString)
+        for(String testCaseString :testCasesAsStrings)
         {
             TestCase testCase = new TestCase(testCaseString);
             testCase.setTestCaseListIndex(testCasesList.getNumberOfEntries());
@@ -73,13 +71,22 @@ public class Program
             verifyTestCase(testCase);
             System.out.println();
         }
+
+        if(testCasesList.getNumberOfEntries() > userHashMap.getTableSize())
+        {
+            userHashMap.increaseArraySize(testCasesList.getNumberOfEntries());
+        }
     }
 
+    /**
+     * Verifies via a logical boolean operator that each field within a TestCase meets the necessary criteria.
+     * @param testCase the TestCase the is to be verified
+    */
     public static boolean verifyTestCase(TestCase testCase)
     {
         boolean verification = testCase.getVerification(testCase);
 
-        if(verification == true)
+        if(verification && verifiedTestCases)
         {
             verifiedTestCases = true;
         }
@@ -91,6 +98,10 @@ public class Program
         System.out.println("Verification of TestCase at the Index of " + testCase.getTestCaseListIndex() + " is " + verification);
         return verifiedTestCases;
     }
+
+    /**
+     * Runs the through each Node in testCaseList, which contains a linked list of TestCase's, and then performs the desired actions.
+     */
 
     public static void runTestCases()
     {
@@ -109,8 +120,18 @@ public class Program
                         break;
 
                     case "Lookup":
-                        userHashMap.getValue(testCase.getUserName().hashCode());
-                        System.out.println(testCase.getUserName()+" has been looked up");
+
+                        User lookedUpUser = (User)userHashMap.getValue(testCase.getUserName().hashCode());
+
+                        if(lookedUpUser != null)
+                        {
+                            System.out.println(lookedUpUser.getUserName() + " has been looked up");
+                            System.out.println(lookedUpUser.toString());
+                        }
+                        else
+                        {
+                            System.out.println(testCase.getUserName() + " has been looked up. User does not exist");
+                        }
                         break;
 
                     case "Delete":

@@ -7,6 +7,10 @@ public class Node<T>
     private Node nodeBefore;
     private Node nodeAfter;
 
+    /**
+     * Constructor for a Node object that will be inserted into a CustomLinkedList
+     * @param data the value(s) of the parsed object.
+     */
     public Node(T data)
     {
         this(data,null, null);
