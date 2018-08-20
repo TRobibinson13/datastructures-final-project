@@ -13,6 +13,11 @@ public class TestCase
     private boolean verification;
     private int testCaseListIndex;
 
+
+    /**
+     * Constructor for TestCase
+     * @param testCase
+     */
     public TestCase(String testCase)
     {
         String testCaseInfoString = new String(testCase.substring(testCase.indexOf(":") + 2));
@@ -70,10 +75,14 @@ public class TestCase
             verifyName(firstName);
             verifyName(lastName);
         }
-        //verifyTestCase();
         setUserName(firstName, lastName);
     }
 
+    /**
+     * T.R.
+     * Verifies the parsed string meets the necessary criteria which determined by the functions Regex filter.
+     * @param param the String that is to be analyzed.
+     */
     public void verifyName(String param)
     {
         if(param.matches("\\D*"))
@@ -86,6 +95,11 @@ public class TestCase
         }
     }
 
+    /**
+     * T.R.
+     * Counts and compares a testCases's paramCount to its verifiedParams to ensure each field has met its necessary criteria.
+     * @param testCase the test case that is to be inspected.
+     */
     public void verifyTestCase(TestCase testCase)
     {
         if(this.verifiedParams == paramCount)

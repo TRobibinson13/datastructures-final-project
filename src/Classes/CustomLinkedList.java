@@ -6,6 +6,7 @@ public class CustomLinkedList<T>
     private int numberOfEntries;
 
     /**
+     * T.R.
      * The Constructor for CustomLinkedList()
      */
     public CustomLinkedList()
@@ -15,6 +16,7 @@ public class CustomLinkedList<T>
     }
 
     /**
+     * T.R.
      * Method to add a new Node to a CustomLinkedList() without specifying an index.
      * @param newNode the new node that is to be added to the list.
      */
@@ -39,6 +41,7 @@ public class CustomLinkedList<T>
     }
 
     /**
+     * T.R.
      * Method to add a Node into the list at a specified index.
      * @param index the desired int index value for the newly added Node.
      * @param newNode The new Node that is to be created.
@@ -93,6 +96,7 @@ public class CustomLinkedList<T>
     }
 
     /**
+     * T.R.
      * Increments the number of entries in the list @param numberOfEntries
      */
     public void incrementNumberOfEntries()

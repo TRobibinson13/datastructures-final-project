@@ -6,6 +6,7 @@ public class HashMap<T>
     private static int TABLE_SIZE = 13;
 
     /**
+     * T.R.
      * Constructor for HashMap of HashEntry's
      */
     public HashMap()
@@ -15,6 +16,7 @@ public class HashMap<T>
     }
 
     /**
+     * T.R.
      * Method to fill a targeted table with null value's
       * @param targetTable The Table that is to be targeted
      */
@@ -27,6 +29,7 @@ public class HashMap<T>
     }
 
     /**
+     * T.R.
      * Method to fill a targeted table with another tables values.
      * @param importedTable The source table that's values are going be imported.
      * @param targetTable The destination table that is to import the importedTable's values.
@@ -53,6 +56,7 @@ public class HashMap<T>
     }
 
     /**
+     * T.R.
      * Method to modify an existing table's size by means of creating a new table with the desired values.
      * @param newTableSize the desired size of the new/modified table as an int.
      */
@@ -66,6 +70,7 @@ public class HashMap<T>
     }
 
     /**
+     * T.R.
      * Method to retrieve the value of a HashEntry which uses its key to find the relative index of the entry.
      * @param key The key that is to be passed into the method
      * @return the value of the KVP.
@@ -90,6 +95,7 @@ public class HashMap<T>
     }
 
     /**
+     * T.R.
      * Method to delete a HashEntry from the HashMap by setting its key to null.
      * @param key
      */
@@ -117,6 +123,7 @@ public class HashMap<T>
 
 
     /**
+     * T.R.
      * Boolean method check to confirm the current table size is Prime in efforts to eliminate possible collisions.
      * @param numberToCheck
      * @return the boolen status of the method
@@ -140,6 +147,7 @@ public class HashMap<T>
     }
 
     /**
+     * T.R.
      * Method to find the next prime value for a table's table size relative to the parsed int.
      * @param minNumberToCheck
      * @return
@@ -156,6 +164,7 @@ public class HashMap<T>
     }
 
     /**
+     * T.R.
      * Method to increase the current table size, and set that as the new constant.
      * @param minTableSize the minimum acceptable table size for determining the new table size.
      */

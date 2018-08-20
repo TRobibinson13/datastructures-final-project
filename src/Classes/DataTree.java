@@ -4,6 +4,12 @@ public class DataTree<T>
 {
     DataTreeNode root;
 
+    /**
+     * T.R.
+     * Adds a new DataTreeNode to the DataTree.
+     * @param key The Key to the KVP as an int.
+     * @param value The Value to the KVP as an undefined Object
+     */
     public void addDataTreeNode(int key, T value)
     {
         DataTreeNode newDataTreeNode = new DataTreeNode(key, value);
@@ -76,7 +82,13 @@ public class DataTree<T>
         }
     }
 
-    public DataTreeNode findNode(int key)
+    /**
+     * T.R.
+     * Finds and returns the value of the targeted Object
+     * @param key the Key target value that stnads place as the locator for obtaining the value to the KVP.
+     * @return the value of the targeted Key as undefined Object.
+     */
+    public Object findNode(Integer key)
     {
         DataTreeNode targetNode = root;
 
@@ -93,9 +105,15 @@ public class DataTree<T>
 
             if(targetNode == null){return null;}
         }
-        return targetNode;
+        return targetNode.getValue();
     }
 
+    /**
+     * T.R.
+     * Removes a Node from the DataTree
+     * @param key Locator for targeted Key in a KVP to be removed.
+     * @return boolean value of if the target was successfully removed
+     */
     public boolean removeNode(int key)
     {
         DataTreeNode targetNode = root;
@@ -193,6 +211,12 @@ public class DataTree<T>
         return true;
     }
 
+    /**
+     * T.R.
+     * Replaces DataTreeNode in the DataTree and reconstructs as/if needed.
+     * @param replacedNode The DataTreeNode that is to be replaced
+     * @return the DataTreeNode that will be taking the @replacedNode 's position
+     */
     public DataTreeNode getReplacementNode(DataTreeNode replacedNode)
     {
         DataTreeNode replacementParent = replacedNode;

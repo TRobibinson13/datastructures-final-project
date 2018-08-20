@@ -11,6 +11,13 @@ public class User
     private String userName;
     private Integer userKey;
 
+    /**
+     * Constructor for User
+     * @param firstName the Users First Name
+     * @param lastName the Users Last Name
+     * @param phoneNumber the Users Phone Number
+     * @param email the Users Email Address
+     */
     public User(String firstName, String lastName, String phoneNumber, String email)
     {
         setFirstName(firstName);
@@ -84,6 +91,10 @@ public class User
         this.userKey = (this.userName).hashCode();
     }
 
+    /**
+     * Gathers the values of the Users First Name, Last Name, Phone Number, and Email Address.  Then Constructs a new String as "output" to report the values.
+     * @return
+     */
     public String toString()
     {
         String newLine = System.getProperty("line.separator");

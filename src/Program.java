@@ -6,8 +6,10 @@ public class Program
     private static boolean verifiedTestCases;
     private static CustomLinkedList testCasesList = new CustomLinkedList();
     private static HashMap userHashMap = new HashMap();
+    private static DataTree userDataTree = new DataTree();
 
     /**
+     * T.R.
      * The main method begins the execution of Program based on the parsed Test Cases as an array of Strings.
      */
     public static void main(String[] args)
@@ -40,15 +42,20 @@ public class Program
                         "Test Case25: Lookup John Doe"
                 };
 
-        generateTestCases(testCasesString);
+        //generateTestCases(testCasesString);
 
-        runTestCases();
+        //runTestCases();
+
+        generateTestCasesDataTree(testCasesString);
+
+        runTestCasesDataTree();
 
         System.out.println("Stop point");
     }
 
     /**
-     * Breaks appart an array of strings into individual strings.  Per string, it then creates a TestCase object via its values, and then adds the string
+     * T.R.
+     * For the HashMap Data Structure, Breaks apart an array of strings into individual strings.  Per string, it then creates a TestCase object via its values, and then adds the string
      * as a Node into a Linked list
      * @param testCasesAsStrings the Array of Strings that is to be broken apart.
      */
@@ -79,6 +86,34 @@ public class Program
     }
 
     /**
+     * T.R.
+     * For the DataTree Data Structure, breaks apart an array of strings into individual strings.  Per string, it then creates a TestCase object via its values, and then adds the string
+     * as a Node into a Linked list.
+     * @param testCasesAsStrings the Array of Strings that is to be broken apart.
+     */
+    public static void generateTestCasesDataTree(String[] testCasesAsStrings)
+    {
+        verifiedTestCases = true;
+
+        for(String testCaseString :testCasesAsStrings)
+        {
+            TestCase testCase = new TestCase(testCaseString);
+            testCase.setTestCaseListIndex(testCasesList.getNumberOfEntries());
+            Node newNode = new Node(testCase);
+            testCasesList.add(newNode);
+
+            String outputMessage = testCaseString + " has been added to the testCaseList at the index of " + testCase.getTestCaseListIndex();
+            System.out.println(outputMessage);
+
+            testCasesList.incrementNumberOfEntries();
+            System.out.println("TestCase List Count: " + testCasesList.getNumberOfEntries());
+            verifyTestCase(testCase);
+            System.out.println();
+        }
+    }
+
+    /**
+     * T.R.
      * Verifies via a logical boolean operator that each field within a TestCase meets the necessary criteria.
      * @param testCase the TestCase the is to be verified
     */
@@ -100,7 +135,8 @@ public class Program
     }
 
     /**
-     * Runs the through each Node in testCaseList, which contains a linked list of TestCase's, and then performs the desired actions.
+     * T.R.
+     * For the HashMap Data Structure Runs the through each Node in testCaseList, which contains a linked list of TestCase's, and then performs the desired actions.
      */
 
     public static void runTestCases()
@@ -137,6 +173,52 @@ public class Program
                     case "Delete":
                         System.out.println(testCase.getUserName()+ " is being removed");
                         userHashMap.deleteEntry(testCase.getUserName().hashCode());
+                        break;
+                }
+            }
+            currentNodeTestCase = currentNodeTestCase.getNodeAfter();
+        }
+    }
+
+    /**
+     * T.R.
+     * For the DataTree Data Structure Runs the through each Node in testCaseList, which contains a linked list of TestCase's, and then performs the desired actions.
+     */
+
+    public static void runTestCasesDataTree()
+    {
+        Node currentNodeTestCase = testCasesList.firstNode;
+
+        while(currentNodeTestCase != null)
+        {
+            if(currentNodeTestCase.data instanceof TestCase)
+            {
+                TestCase testCase = (TestCase)currentNodeTestCase.data;
+                switch (testCase.getTestCaseType())
+                {
+                    case "Insert":
+                        userDataTree.addDataTreeNode(testCase.getUserName().hashCode(), new User(testCase.getFirstName(), testCase.getLastName(), testCase.getPhoneNumber(), testCase.getEmail()));
+                        System.out.println(testCase.getUserName()+ " is being Inserted");
+                        break;
+
+                    case "Lookup":
+
+                        User lookedUpUser = (User)userDataTree.findNode(testCase.getUserName().hashCode());
+
+                        if(lookedUpUser != null)
+                        {
+                            System.out.println(lookedUpUser.getUserName() + " has been looked up");
+                            System.out.println(lookedUpUser.toString());
+                        }
+                        else
+                        {
+                            System.out.println(testCase.getUserName() + " has been looked up. User does not exist");
+                        }
+                        break;
+
+                    case "Delete":
+                        System.out.println(testCase.getUserName()+ " is being removed");
+                        userDataTree.removeNode(testCase.getUserName().hashCode());
                         break;
                 }
             }

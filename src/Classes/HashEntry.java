@@ -7,6 +7,7 @@ public class HashEntry <T>
     private T value;
 
     /**
+     * T.R.
      * Constructor for HashEntry
      * @param key The Key to the HashEntry KVP as an int.
      * @param value The Value to the HashEntry KVP as an undefined Object.

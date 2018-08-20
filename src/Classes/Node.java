@@ -8,6 +8,7 @@ public class Node<T>
     private Node nodeAfter;
 
     /**
+     * T.R.
      * Constructor for a Node object that will be inserted into a CustomLinkedList
      * @param data the value(s) of the parsed object.
      */
